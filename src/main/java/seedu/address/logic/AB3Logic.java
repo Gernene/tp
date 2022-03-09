@@ -9,7 +9,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AB3Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.person.Person;
+import seedu.address.model.tamodule.TaModule;
 
 /**
  * API of the Logic component
@@ -33,6 +35,12 @@ public interface AB3Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the filtered list of persons */
+    ObservableList<ClassGroup> getFilteredClassGroupList();
+
+    /** Returns an unmodifiable view of the filtered list of persons */
+    ObservableList<TaModule> getFilteredModuleList();
 
     /**
      * Returns the user prefs' address book file path.

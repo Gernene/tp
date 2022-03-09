@@ -54,6 +54,16 @@ public class StorageManager implements Storage {
     }
 
     @Override
+    public Path getModuleDataFilePath() {
+        return addressBookStorage.getModuleDataFilePath();
+    }
+
+    @Override
+    public Path getClassGroupDataFilePath() {
+        return addressBookStorage.getClassGroupDataFilePath();
+    }
+
+    @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
         return readAddressBook(addressBookStorage.getAddressBookFilePath());
     }

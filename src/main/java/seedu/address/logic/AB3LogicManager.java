@@ -14,7 +14,9 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AB3Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.person.Person;
+import seedu.address.model.tamodule.TaModule;
 import seedu.address.storage.Storage;
 
 /**
@@ -62,6 +64,16 @@ public class AB3LogicManager implements AB3Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ObservableList<TaModule> getFilteredModuleList() {
+        return model.getFilteredModuleList();
+    }
+
+    @Override
+    public ObservableList<ClassGroup> getFilteredClassGroupList() {
+        return model.getFilteredClassGroupList();
     }
 
     @Override

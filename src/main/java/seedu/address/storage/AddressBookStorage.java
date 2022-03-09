@@ -18,6 +18,16 @@ public interface AddressBookStorage {
     Path getAddressBookFilePath();
 
     /**
+     * Returns the file path of the data file.
+     */
+    Path getModuleDataFilePath();
+
+    /**
+     * Returns the file path of the data file.
+     */
+    Path getClassGroupDataFilePath();
+
+    /**
      * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
@@ -28,7 +38,7 @@ public interface AddressBookStorage {
     /**
      * @see #getAddressBookFilePath()
      */
-    Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyAddressBook> readAddressBook(Path filePath, Path moduleDataFilePath, Path classGroupDataFilePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyAddressBook} to the storage.

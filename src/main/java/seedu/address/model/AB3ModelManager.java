@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.classgroup.ClassGroup;
 import seedu.address.model.person.Person;
+import seedu.address.model.tamodule.TaModule;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +24,8 @@ public class AB3ModelManager implements AB3Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<TaModule> filteredModules;
+    private final FilteredList<ClassGroup> filteredClassGroups;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +38,8 @@ public class AB3ModelManager implements AB3Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredModules = new FilteredList<>(this.addressBook.getModuleList());
+        filteredClassGroups = new FilteredList<>(this.addressBook.getClassGroupList());
     }
 
     public AB3ModelManager() {
@@ -111,6 +117,54 @@ public class AB3ModelManager implements AB3Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public boolean hasModule(TaModule module) {
+        requireNonNull(module);
+        return addressBook.hasModule(module);
+    }
+
+    @Override
+    public void deleteModule(TaModule target) {
+        addressBook.removeModule(target);
+    }
+
+    @Override
+    public void addModule(TaModule module) {
+        addressBook.addModule(module);
+        updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
+    }
+
+    @Override
+    public void setModule(TaModule target, TaModule editedModule) {
+        requireAllNonNull(target, editedModule);
+
+        addressBook.setModule(target, editedModule);
+    }
+
+    @Override
+    public boolean hasClassGroup(ClassGroup classGroup) {
+        requireNonNull(classGroup);
+        return addressBook.hasClassGroup(classGroup);
+    }
+
+    @Override
+    public void deleteClassGroup(ClassGroup target) {
+        addressBook.removeClassGroup(target);
+    }
+
+    @Override
+    public void addClassGroup(ClassGroup classGroup) {
+        addressBook.addClassGroup(classGroup);
+        updateFilteredClassGroupList(PREDICATE_SHOW_ALL_CLASS_GROUPS);
+    }
+
+    @Override
+    public void setClassGroup(ClassGroup target, ClassGroup editedClassGroup) {
+        requireAllNonNull(target, editedClassGroup);
+
+        addressBook.setClassGroup(target, editedClassGroup);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -126,6 +180,40 @@ public class AB3ModelManager implements AB3Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Filtered Module List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<TaModule> getFilteredModuleList() {
+        return filteredModules;
+    }
+
+    @Override
+    public void updateFilteredModuleList(Predicate<TaModule> predicate) {
+        requireNonNull(predicate);
+        filteredModules.setPredicate(predicate);
+    }
+
+    //=========== Filtered Class Group List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<ClassGroup> getFilteredClassGroupList() {
+        return filteredClassGroups;
+    }
+
+    @Override
+    public void updateFilteredClassGroupList(Predicate<ClassGroup> predicate) {
+        requireNonNull(predicate);
+        filteredClassGroups.setPredicate(predicate);
     }
 
     @Override
