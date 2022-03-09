@@ -5,6 +5,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.classgroup.ClassGroup;
+import seedu.address.model.classgroup.ClassGroupId;
+import seedu.address.model.classgroup.ClassGroupType;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -12,11 +15,19 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tamodule.ModuleCode;
+import seedu.address.model.tamodule.ModuleName;
+import seedu.address.model.tamodule.TaModule;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+    private static final TaModule MODULE1 = new TaModule(new ModuleName("Software Engineering"),
+        new ModuleCode("CS2103T"));
+    private static final TaModule MODULE2 = new TaModule(new ModuleName("Data Structures"),
+        new ModuleCode("CS2040S"));
+
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
@@ -40,10 +51,30 @@ public class SampleDataUtil {
         };
     }
 
+    public static TaModule[] getSampleModules() {
+        return new TaModule[] {
+            MODULE1,
+            MODULE2
+        };
+    }
+
+    public static ClassGroup[] getSampleClassGroups() {
+        return new ClassGroup[] {
+            new ClassGroup(new ClassGroupId("G09"), ClassGroupType.SECTIONAL, MODULE1),
+            new ClassGroup(new ClassGroupId("G07"), ClassGroupType.SECTIONAL, MODULE2)
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
+        }
+        for (TaModule sampleModule : getSampleModules()) {
+            sampleAb.addModule(sampleModule);
+        }
+        for (ClassGroup sampleClassGroup : getSampleClassGroups()) {
+            sampleAb.addClassGroup(sampleClassGroup);
         }
         return sampleAb;
     }
