@@ -40,12 +40,12 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
   * Updated the GUI color scheme/overall styling
   * Wrote additional tests for common classes (ex: ModelManagerTest)
-  * Created several entity-builders for testing sample data
+  * Created several entity-builders for testing sample data. This required a thorough examination of the entire document.
 
 * **Documentation**:
   * User Guide:
     * Modified feature list to serve the dual purpose of a step-by-step walkthrough.
-    * Reworked UG language to sound more "inviting" and "user-friendly".
+    * Reworked UG language to sound more "inviting" and "user-friendly". This required a thorough examination of the entire document.
   * Developer Guide:
     * Wrote target user profile
     * Contributed heavily to target user stories
